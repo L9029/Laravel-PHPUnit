@@ -18,4 +18,8 @@ class Post extends Model
     public function getSlugAttribute(){
         return str_replace(' ', '-', $this->attributes['name']);
     }
+
+    public function href(){
+        return 'blog/' . $this->slug;
+    }
 }
