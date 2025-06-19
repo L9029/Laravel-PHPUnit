@@ -24,4 +24,11 @@ class RutasTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_ruta_profile(): void
+    {
+        $response = $this->get('profile');
+
+        $response->assertStatus(200);
+    }
 }
