@@ -15,8 +15,17 @@ class ProfileTest extends TestCase
     {
         Storage::fake("local");
 
+        // Desactiva los middleware para pruebas
+        // $this->withoutMiddleware();
+
+        // Recomendable usar el token CSRF para evitar problemas de seguridad.
+        $getResponse = $this->get('profile'); // Obtiene la vista del perfil para asegurarse de que el token CSRF esté presente.
+        $token = csrf_token();
+
+        // Simula una solicitud POST a la ruta "profile" con un archivo de imagen falso.
         $response = $this->post("profile", [
-            "photo" => $photo = UploadedFile::fake()->image("photo.png")
+            "photo" => $photo = UploadedFile::fake()->image("photo.png"),
+            "_token" => $token, // Incluye el token CSRF
         ]);
 
         // Verifica que el archivo se haya almacenado correctamente en el disco local.

@@ -14,10 +14,10 @@ Route::get('help', function () {
 Route::view("profile", "profile");
 
 Route::post('profile', function (Request $request) {
-    
-    // $request->validate([
-    //     'photo' => 'required|image|max:2048',
-    // ]);
+
+    $request->validate([
+        'photo' => 'required|image|max:2048',
+    ]);
 
     $request->file('photo')->store('profiles', 'local');
 
