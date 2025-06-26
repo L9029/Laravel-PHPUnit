@@ -33,4 +33,18 @@ class ProfileTest extends TestCase
 
         $response->assertRedirect("profile");
     }
+
+    public function test_photo_required() 
+    {
+        $getResponse = $this->get('profile');
+        $token = csrf_token();
+
+        $response = $this->post("profile", [
+            "photo" => null,
+            "_token" => $token
+        ]);
+
+        // Verifica que exista un error de validación para el campo "photo".
+        $response->assertSessionHasErrors("photo");
+    }
 }

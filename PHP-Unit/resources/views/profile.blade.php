@@ -9,6 +9,18 @@
     <form action="profile" method="post" enctype="multipart/form-data">
         @csrf
 
+        @if( $errors->any() )
+            <div>
+                <ul>
+                    @foreach( $errors->all() as $error )
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <hr>
+
         <input type="file" name="photo">
 
         <button type="submit">Enviar Arhivo</button>
