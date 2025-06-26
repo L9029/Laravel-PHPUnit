@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileControler;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,13 +14,4 @@ Route::get('help', function () {
 
 Route::view("profile", "profile");
 
-Route::post('profile', function (Request $request) {
-
-    $request->validate([
-        'photo' => 'required|image|max:2048',
-    ]);
-
-    $request->file('photo')->store('profiles', 'local');
-
-    return redirect('profile');
-});
+Route::post('profile', [ProfileControler::class, 'upload_file'])->name('profile.upload_file');
